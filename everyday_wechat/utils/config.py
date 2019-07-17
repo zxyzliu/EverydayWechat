@@ -7,17 +7,19 @@ import os
 import copy as mycopy
 import yaml
 
+__all__ = ['set', 'get', 'copy', 'update', '_print']
 
-def init():
-    """
-    将 yaml 里的配置文件导入到 config.py 中
-    :return: bool ，true 表示数据导入成功。
-    """
-    global opts
-    opts = get_yaml()
-    if opts:
-        return True
-    return False
+
+# def init():
+#     """
+#     将 yaml 里的配置文件导入到 config.py 中
+#     :return: bool ，true 表示数据导入成功。
+#     """
+#     global opts
+#     opts = get_yaml()
+#     if opts:
+#         return True
+#     return False
 
 def get_yaml():
     """
@@ -36,29 +38,35 @@ def get_yaml():
         print('你的 _config.yaml 文件配置出错...')
     return None
 
+
 opts = get_yaml()
+
 
 def set(key, value):
     """ 通过 key 设置某一项值 """
     opts[key] = value
 
+
 def get(key, default=None):
     """ 通过 key 获取值 """
     return opts.get(key, default)
+
 
 def copy():
     """ 复制配置 """
     return mycopy.deepcopy(opts)
 
+
 def update(new_opts):
     """ 全部替换配置 """
     opts.update(new_opts)
 
+
 def _print():
     print(opts)
 
+
 if __name__ == '__main__':
-    init()
     you = get('is_forced_switch')
     print(you)
     # print(copy())
